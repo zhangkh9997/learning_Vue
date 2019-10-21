@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <comp2></comp2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const comp1 = {
+        template: `<div><h2>子组件</h2></div>`
+    };
+
+    const comp2 = {
+        template: ` <div>
+                        <h2>父组件</h2>
+                        <comp1></comp1>
+                    </div>`,
+        components: {
+            comp1
+        }
+    };
+
+
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {},
+        components: {
+            comp2
+        }
+    })
+
+</script>
+
+</body>
+</html>

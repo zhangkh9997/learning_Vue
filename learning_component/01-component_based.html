@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+<!--    {{msg}}-->
+
+    <!--3 使用组件 -->
+    <my-comp></my-comp>
+
+<!--    使用局部组件-->
+    <comp2></comp2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    //1.1 创建组件构造器对象
+    // const comp = Vue.extend({
+    //     template: '<div><h2>TITLE</h2></div>'
+    // });
+
+    //1.2 组件创建的简化写法
+    const comp = {
+        template: '<div><h2>TITLE</h2></div>'
+    };
+
+    const comp2 = {
+      template: `<div><h2>TITLE2</h2></div>`
+    };
+
+    //2.1 注册全局组件
+    Vue.component('my-comp', comp);
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {},
+
+        //2.2 注册局部组件
+        components:{
+            comp2
+        }
+    })
+
+</script>
+
+</body>
+</html>
