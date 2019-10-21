@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+   <comp :son_songs="songs" :s-msg="msg"></comp>
+</div>
+
+<template id="comp">
+    <div>
+        <h2>
+            小小的子组件，存放着大大的梦想；
+        </h2>
+        <ul >
+            <li v-for="(item,index) in son_songs" :key="index">{{ item }}</li>
+        </ul>
+        <h2>{{ sMsg }}</h2>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    // 父组件向子组件传递数据：1.首先需要在子组件标签中进行属性绑定，将要传递的数据赋值给子组件的属性
+    // 2.其次需要在子组件的创建对象中添加props属性，将自定义的属性进行注册；3.接下来就可以使用了
+    const comp = {
+        template: '#comp',
+        // props: ['son_songs']
+
+        // props 可以是简单的数组，只用来注册属性；也可以是对象，1.用来对属性进行类型限制，2.用来设置默认值 3.标记必须传值属性
+        // 也可以自定义类型/值验证方法等等。
+        props: {
+            // 注意：如果属性使用驼峰标识 则在组件标签中需要使用-进行连接，并将大写转换为小写
+            sMsg:{
+                type: String,
+                default: 'Are you kidding me?',
+                required: true
+            },
+
+            // 如果属性是一个数组，要为其设置默认值，需要将使用函数进行封装，在函数中再返回默认值数组；类似于组件中的data属性。
+            // 如果属性是一个对象，在设置默认值时，则在函数返回一个对象
+            son_songs: {
+                type: Array,
+                default(){
+                    return []
+                }
+            }
+        }
+    };
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!',
+            songs:['野狼disco','你的酒馆对我打了烊','maps','memories']
+        },
+        methods: {},
+        components:{
+            comp
+        }
+    })
+
+</script>
+
+</body>
+</html>
