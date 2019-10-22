@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <comp>
+        <button slot="left">back</button>
+        <span slot="center">title</span>
+        <i slot="right">forward</i>
+    </comp>
+</div>
+
+<template id="comp">
+    <div>
+
+        <!-- 给插槽起名字，在使用的时候需要指定是哪个名字的插槽 -->
+        <slot name="left"><span>左边</span></slot>
+        <slot name="center"><span>中间</span></slot>
+        <slot name="right"><span>右边</span></slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    const comp = {
+        template: '#comp'
+    };
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {},
+        components: {
+            comp
+        }
+    })
+
+</script>
+
+</body>
+</html>

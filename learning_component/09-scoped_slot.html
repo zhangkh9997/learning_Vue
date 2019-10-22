@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <comp></comp>
+    <comp>
+        <!-- 父组件替换插槽中的标签，但是内容是子组件提供的 -->
+        <!-- 在组件插槽中需要使用 slot-scope 进行绑定接受数据的名称，
+             再通过名称调用绑定好的属性
+          -->
+        <template slot-scope="prl">
+            <span>{{ prl.data.join(' * ') }}</span>
+        </template>
+    </comp>
+    <comp></comp>
+</div>
+
+<template id="comp">
+    <div>
+        <!-- 首先，对slot插槽进行属性绑定，将子组件的数据绑定到定义的属性上 -->
+        <slot :data="pl">
+            <ul>
+                <li v-for="item in pl">{{item}}</li>
+            </ul>
+        </slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    const comp = {
+        template: '#comp',
+        data() {
+            return {
+                pl: ['java', 'python', 'C#', 'C++']
+            }
+        }
+    };
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {},
+        components: {
+            comp
+        }
+    })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--
+        1.插槽的基本使用：<slot></slot>
+        2.插槽的默认值：<slot><button></button></slot>
+        3.如果有多个标签，同时放到组件进行替换时，将会一起作为替换元素被放到插槽中
+    -->
+
+
+    <!-- 如果需要在插槽中添加标签，则把语句写在组件标签中 -->
+    <comp><input type="button" value="点我"></comp>
+    <comp></comp>
+    <comp></comp>
+    <comp></comp>
+</div>
+
+<template id="comp">
+    <div>
+        <h2>子组件</h2>
+        <p>春花秋月何时了，往事知多少？</p>
+        <!-- 插槽中可以为其添加默认值，就是写上一些默认显示的标签，在需要替换时，在组件标签中写上即可 -->
+        <slot><a href="#">超链接，想去哪，就去哪</a></slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    const comp = {
+        template: '#comp'
+    };
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {},
+        components: {
+            comp
+        }
+    })
+
+</script>
+
+</body>
+</html>
