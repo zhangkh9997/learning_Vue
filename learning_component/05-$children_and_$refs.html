@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <comp></comp>
+    <comp ref="main"></comp>
+    <comp ref="body"></comp>
+    <input type="button" value="点我" @click="btnClick">
+</div>
+
+<template id="comp">
+    <h2>This is a son component</h2>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    const comp = {
+        template: '#comp',
+        data(){
+            return {
+                user:{
+                    id:1,
+                    name: 'zs',
+                    age: 18
+                }
+            }
+        }
+    };
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {
+            btnClick() {
+                console.log(this.$refs.body.user.name);
+            }
+        },
+        components: {
+            comp,
+        }
+    })
+
+</script>
+
+</body>
+</html>

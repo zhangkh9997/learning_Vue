@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    {{msg}}
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    // 注意：这两种不常用，也不建议使用，会增加组件之间的耦合度，了解就好
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {}
+    })
+
+</script>
+
+</body>
+</html>
