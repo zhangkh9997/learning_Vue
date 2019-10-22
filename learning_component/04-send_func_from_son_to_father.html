@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    {{msg}}
+    // 3. 在父组件中通过自定义事件绑定的方式来定义接收子组件发出的事件名称，并使用自己的函数来接收
+    <comp @fathrecv="recv"></comp>
+</div>
+
+<template id="comp">
+    <div>
+        <h2>子组件</h2>
+        <input type="button" :value="item.name" v-for="item in categories" @click="sonclick(item)">
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const comp = {
+        template: '#comp',
+        data() {
+            return {
+                categories: [
+                    {
+                        id: 1, name: 'zs'
+                    },
+                    {
+                        id: 2, name: 'ls'
+                    },
+                    {
+                        id: 3, name: 'wem'
+                    }
+                ]
+            }
+        },
+        // 1.将子组件中的数据传递给父组件，首先需要在子组件中定义发送数据的函数
+        // 2.并通过 $emit 来发出自定义的事件 名称 和 要传递的数据
+        methods: {
+            sonclick(item){
+                this.$emit('fathrecv',item)
+            }
+        }
+    };
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Good morning!!'
+        },
+        methods: {
+
+            // 4.在父组件的函数中操作传递过来的数据
+            recv(item){
+                console.log(item.id);
+            }
+        },
+        components: {
+            comp
+        }
+    })
+
+</script>
+
+</body>
+</html>
