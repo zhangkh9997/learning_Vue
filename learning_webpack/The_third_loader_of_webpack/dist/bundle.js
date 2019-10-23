@@ -65,15 +65,19 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_info_js__ = __webpack_require__(2);
+
+
+var _info = __webpack_require__(1);
+
 // 这是整个程序的入口文件
 
 // 使用commonJS的模块化规范导入
-const {add, mul} = __webpack_require__(1);
+var _require = __webpack_require__(2),
+    add = _require.add,
+    mul = _require.mul;
 
 // 这是使用ES6的模块化规范导入
 
@@ -81,7 +85,7 @@ const {add, mul} = __webpack_require__(1);
 console.log(add(10, 20));
 console.log(mul(10, 20));
 
-console.log(__WEBPACK_IMPORTED_MODULE_0__js_info_js__["c" /* name */], __WEBPACK_IMPORTED_MODULE_0__js_info_js__["a" /* age */], __WEBPACK_IMPORTED_MODULE_0__js_info_js__["b" /* height */]);
+console.log(_info.name, _info.age, _info.height);
 
 // 使main.js入口文件依赖css文件，才能通过webpack对css文件进行打包
 __webpack_require__(3);
@@ -91,36 +95,43 @@ __webpack_require__(3);
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+// 使用ES6的模块化规范导出
+var name = 'zs';
+var age = 18;
+var height = 1.88;
+
+exports.name = name;
+exports.age = age;
+exports.height = height;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 function add(a, b) {
-    return a + b
+    return a + b;
 }
 
 function mul(a, b) {
-    return a * b
+    return a * b;
 }
 
 // 使用 commonJS 模块化规范导出
 module.exports = {
-    add,
-    mul
+    add: add,
+    mul: mul
 };
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return age; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return height; });
-// 使用ES6的模块化规范导出
-const name = 'zs';
-const age = 18;
-const height = 1.88;
-
-
 
 /***/ }),
 /* 3 */

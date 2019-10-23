@@ -12,7 +12,7 @@ module.exports = {
         // 由于路径可能发生变化，所以我们需要动态获取路径
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath:'dist/',
+        publicPath: 'dist/',
     },
     module: {
         rules: [
@@ -20,7 +20,7 @@ module.exports = {
             // .css文件中的样式加载到html中生效
             // style-loader 负责将样式添加到DOM中使其生效
             // 注意2：webpack 在使用多个loader的时候是从右向左读取的，注意书写顺序
-            {test: /\.css$/, use: ['style-loader','css-loader']},
+            {test: /\.css$/, use: ['style-loader', 'css-loader']},
             // {test: /\.scss$/, use: ['style-loader','css-loader','sass-loader']}
             // 注意：在加载图片的时候，需要使用url-loader，但是他依赖 file-loader，需要一起本地安装
             // limit 表示图片大小小于limit的值时，将会使用base64对图片进行编码
@@ -30,29 +30,35 @@ module.exports = {
                 test: /\.(jpg|png|jpeg|gif)$/,
                 use: [
                     {
-                        loader:'url-loader',
-                        options:{
-                            limit:13000,
+                        loader: 'url-loader',
+                        options: {
+                            limit: 13000,
                             // [] 在这里中括号表示变量 . 表示拼接 hash:8 表示取哈西值的8位
-                            name:'img/[name].[hash:8].[ext]',
+                            name: 'img/[name].[hash:8].[ext]',
                         }
 
                     },
-                    ]
+                ]
             },
             // 这个是将ES6的语法转换为ES5的各种浏览器都能够识别的语法
             {
-                test:/\.js$/,
+                test: /\.js$/,
                 // exclude 排除的意思
                 exclude: /(node_modules|bower_components)/,
-                use:{
+                use: {
                     loader: 'babel-loader',
-                    options:{
-                        presets:['es2015']  // @babel/preset-env
+                    options: {
+                        presets: ['es2015']  // @babel/preset-env
                     }
                 }
             }
 
         ]
+    },
+    // 通过resolve来解决引用vue时的runtime-only的问题
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.js'
+        }
     }
 };
