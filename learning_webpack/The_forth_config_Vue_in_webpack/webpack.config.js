@@ -1,4 +1,6 @@
 const path = require('path');
+// 导入webpack，可以配置一些webpack自带的plugin
+const webpack = require('webpack');
 
 // 将 webpack 的出口和入口 映射到 webpack的配置文件中 简化命令
 // 完全命令为 webpack ./src/main.js ./dist/bundle.js
@@ -51,7 +53,10 @@ module.exports = {
                         presets: ['es2015']  // @babel/preset-env
                     }
                 }
-            }
+            },
+
+            // vue-loader 在14.0.0以上还需要依赖一个插件(plugin),因此现在需要安装一个低一点的版本
+            {test: /\.vue$/, use:{loader: 'vue-loader'}}
 
         ]
     },
@@ -60,5 +65,8 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.js'
         }
-    }
+    },
+    plugins:[
+        new webpack.BannerPlugin('最终版权归BenAPT所有！！')
+    ],
 };

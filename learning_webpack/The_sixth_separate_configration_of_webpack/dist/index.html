@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+</div>
+<!--
+    1.这个 bundle.js 是通过 webpack 将入口文件 main.js 打包后自定义指定的文件名称生成的
+    2.只需要打包一个入口文件即可，webpack会自动将入口文件依赖的其他模块一起进行打包
+    3.使用的命令是 webpack ./src/main.js ./dist/bundle.js
+    4.这个生成的 bundle.js 可以暂时通过 script 标签引用
+ -->
+<!--<script src="./dist/bundle.js"></script>-->
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>
