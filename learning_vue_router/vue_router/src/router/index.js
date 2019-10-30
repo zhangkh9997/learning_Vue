@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Home from "../components/Home";
 import About from "../components/About";
 import User from "../components/User";
+import HomeMessages from "../components/HomeMessages";
+import HomeNews from "../components/HomeNews";
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,7 +26,19 @@ const routes = [
   {
     path:'/home',
     name:'Home',
-    component: Home
+    component: Home,
+    // 这个是元数据：定义数据的数据，可以用来定义组件的一些是数据
+    meta:[],
+    children:[
+      {
+        path:'news',
+        component:'HomeNews',
+      },
+      {
+        path: 'messages',
+        component: 'HomeMessages'
+      }
+    ]
   },
   {
     path: '/About',
