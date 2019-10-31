@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
-import Home from "../components/Home";
-import About from "../components/About";
-import User from "../components/User";
-import HomeMessages from "../components/HomeMessages";
-import HomeNews from "../components/HomeNews";
+// import Home from "../components/Home";
+// import About from "../components/About";
+// import User from "../components/User";
+// import HomeMessages from "../components/HomeMessages";
+// import HomeNews from "../components/HomeNews";
+const Home = () => import('../components/Home')
+const HomeNews = () => import('../components/HomeNews')
+const HomeMessages = () => import('../components/HomeMessages')
+const About = () => import('../components/About')
+const User = () => import('../components/User')
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,16 +37,16 @@ const routes = [
     children:[
       {
         path:'news',
-        component:'HomeNews',
+        component:HomeNews,
       },
       {
         path: 'messages',
-        component: 'HomeMessages'
+        component: HomeMessages
       }
     ]
   },
   {
-    path: '/About',
+    path: '/about',
     name: 'About',
     component: About
   },
@@ -54,6 +59,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+  // 修改URL的生成模式，默认为hash映射(带#)，history模式：是使用history生成url
   mode: 'history'
 })
 
