@@ -71,7 +71,7 @@
 
   import TabControl from "components/content/tabControl/TabControl";
 
-  import {getHomeMultiData} from 'network/home'
+  import { getHomeMultiData, getHomeGoods } from 'network/home'
     export default {
         name: "Home",
         components:{
@@ -85,14 +85,38 @@
         data(){
             return {
                 banners:[],
-                recommends:[]
+                recommends:[],
+                goods: {
+                    pop: {page: 0, list: []},
+                    news: {page: 0, list: []},
+                    sell: {page: 0, list: []},
+                },
             }
         },
         created() {
-            getHomeMultiData().then(res => {
+            //1 请求轮播图和推荐的数据
+            this.getHomeMultiData();
+            //2 请求商品数据
+            // this.getHomeGoods('pop');
+            // this.getHomeGoods('new');
+            // this.getHomeGoods('sell');
+        },
+        methods: {
+            getHomeMultiData(){
+                getHomeMultiData().then(res => {
                 this.banners = res.data.banner.list;
                 this.recommends = res.data.recommend.list
-            })
+                })
+            },
+            getHomeGoods(type){
+                const page = this.goods[type].page + 1
+                getHomeGoods(type, page).then(res => {
+                    //这是使用了push可以直接添加多个数据到数组中
+                    // 将数组中的元素一个个取出来，再push到数组中
+                    this.goods[type].list.push(...res.data.list)
+                    this.goods[type].page += 1
+                })
+            }
         }
     }
 </script>
@@ -110,7 +134,8 @@
     left: 0;
     right: 0;
     top: 0;
-    z-index: 9;
+    /*bottom: -44px;*/
+    z-index: 90;
   }
 
   .tab-control {
